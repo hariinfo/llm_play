@@ -1,2 +1,2 @@
 # llm_play
-LLM Playground
+LLM Playground to learn LLM baics test
