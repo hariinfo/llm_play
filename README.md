@@ -1,20 +1,12 @@
 # Create virtual environment
-python -m venv .venv
+$python -m venv .venv
 
-# Acticate the virtual environment on windows
-source .venv/Scripts/activate
-
-
-# llm_play
-LLM Playground to learn LLM basics
-
-# Create a vistual environment  
-python3 -m venv venv
-
-## Activate the virtual environment
-source venv/bin/activate
+## Activate the virtual environment on windows
+$source .venv/Scripts/activate
 
 ## Install requirements
-pip install -r requirements.txt
+$pip install -r requirements.txt
 
 ## Run the app
+$cd api
+$flask --app app --debug run

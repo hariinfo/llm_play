@@ -1,3 +1,6 @@
 data
 .venv
 venv
+_temp
+api/_tempapi/__pycache__
+api/_tempapi/__pycache__/**
