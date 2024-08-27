@@ -12,3 +12,7 @@ Content-Type: pdf
 --boundary--
 
 ### -------------------------------------------------------------------------
+POST http://localhost:5000/query
+Content-Type: application/json
+
+{"query": "give me chat that was nice"}
