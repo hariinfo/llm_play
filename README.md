@@ -1,3 +1,10 @@
+# Create virtual environment
+python -m venv .venv
+
+# Acticate the virtual environment on windows
+source .venv/Scripts/activate
+
+
 # llm_play
 LLM Playground to learn LLM basics
 
