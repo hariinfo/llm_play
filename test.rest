@@ -5,10 +5,10 @@ POST http://localhost:5000/embed
 Content-Type: multipart/form-data; boundary=boundary
 
 --boundary
-Content-Disposition: form-data; name="file"; filename="act_panda.pdf"
+Content-Disposition: form-data; name="file"; filename="fb_chat.json"
 Content-Type: pdf
 
-< ./data/ACTPandaMath.pdf
+< ./data/fb_chat.json
 --boundary--
 
 ### -------------------------------------------------------------------------

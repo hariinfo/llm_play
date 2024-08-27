@@ -1,15 +1,15 @@
 import os
 from datetime import datetime
 from werkzeug.utils import secure_filename
-from langchain_community.document_loaders import UnstructuredPDFLoader
+from langchain_community.document_loaders import UnstructuredPDFLoader, WebBaseLoader, JSONLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from api.get_vector_db import get_vector_db
+from get_vector_db import get_vector_db
 
 TEMP_FOLDER = os.getenv('TEMP_FOLDER', './_temp')
 
 # Function to check if the uploaded file is allowed (only PDF files)
 def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'pdf'}
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'json'}
 
 # Function to save the uploaded file to the temporary folder
 def save_file(file):
@@ -24,12 +24,13 @@ def save_file(file):
 
 # Function to load and split the data from the PDF file
 def load_and_split_data(file_path):
-    # Load the PDF file and split the data into chunks
-    loader = UnstructuredPDFLoader(file_path=file_path)
+    # Load the json file and split the data into chunks
+    print("loading data......")
+    loader = JSONLoader(file_path=file_path, jq_schema='.messages[]', text_content=False)
     data = loader.load()
+    print(f"Loaded {data} documents from {file_path}")
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=7500, chunk_overlap=100)
     chunks = text_splitter.split_documents(data)
-
     return chunks
 
 # Main function to handle the embedding process
