@@ -4,7 +4,7 @@ from llama_index.embeddings.nomic import NomicEmbedding
 from llama_index.embeddings.ollama import OllamaEmbedding
 
     
-def embed_model():
+def get_embed_model():
     #Using embedding model hosted by Ollama
     embed_model = OllamaEmbedding(
         model_name="nomic-embed-text",
