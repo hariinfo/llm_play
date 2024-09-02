@@ -1,6 +1,12 @@
-transformers
-accelerate
-langchain-community
+fastapi[standard]
+uvicorn[standard]
+llama-index-llms-ollama
+llama-index-vector-stores-chroma
+llama-index-core
+llama-index-readers-file
+llama-index-llms-ollama
+llama-index-embeddings-huggingface
+ollama
+PyYAML
 chromadb
-langchain-chroma
-flask
+torch==2.3.1
