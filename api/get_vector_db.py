@@ -1,18 +1,26 @@
+
+import chromadb
+from llama_index.core import StorageContext
+from llama_index.vector_stores.chroma import ChromaVectorStore
 import os
-from langchain_community.embeddings import OllamaEmbeddings
-from langchain_community.vectorstores.chroma import Chroma
+from dotenv import load_dotenv, dotenv_values
+import logging
+# Creating an object
+log = logging.getLogger()
 
-CHROMA_PATH = os.getenv('CHROMA_PATH', 'chroma')
-COLLECTION_NAME = os.getenv('COLLECTION_NAME', 'local-rag')
-TEXT_EMBEDDING_MODEL = os.getenv('TEXT_EMBEDDING_MODEL', 'nomic-embed-text')
+def get_vector_storage():
+    #Create chroma db client
+   
+    if os.getenv("CHROMA_PERSISTENT") == "true":
+        log.info("Using persistent chroma vector store")
+        #setts = chromadb.config.Settings(is_persistent=True)
+        client = chromadb.PersistentClient(os.getenv("CHROMA_DB_DIR"))
+    else:
+        log.info("Using non-persistent chroma vector store")
+        db = chromadb.config.Settings(is_persistent=False)
+        client = chromadb.Client(settings=db)
 
-def get_vector_db():
-    embedding = OllamaEmbeddings(model=TEXT_EMBEDDING_MODEL,show_progress=True)
-
-    db = Chroma(
-        collection_name=COLLECTION_NAME,
-        persist_directory=CHROMA_PATH,
-        embedding_function=embedding
-    )
-
-    return db
+    chroma_collection = client.get_or_create_collection(os.getenv("CHROMA_COLLECTION"))
+    vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
+    storage_context = StorageContext.from_defaults(vector_store=vector_store)
+    return storage_context

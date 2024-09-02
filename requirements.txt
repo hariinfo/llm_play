@@ -12,3 +12,4 @@ ollama
 PyYAML
 chromadb
 torch==2.3.1
+python-dotenv
