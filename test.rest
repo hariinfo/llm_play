@@ -1,4 +1,4 @@
-GET http://localhost:5000/health
+GET http://localhost:8000/health
 
 ### ---------------------------- UPLOAD FEED IMAGES ----------------------------
 POST http://localhost:5000/embed
@@ -12,7 +12,7 @@ Content-Type: pdf
 --boundary--
 
 ### -------------------------------------------------------------------------
-POST http://localhost:5000/query
+POST http://localhost:8000/query
 Content-Type: application/json
 
 {"query": "give me chat that was nice"}
