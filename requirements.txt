@@ -6,6 +6,8 @@ llama-index-core
 llama-index-readers-file
 llama-index-llms-ollama
 llama-index-embeddings-huggingface
+llama-index-embeddings-nomic
+llama-index-embeddings-ollama
 ollama
 PyYAML
 chromadb

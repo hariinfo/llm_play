@@ -3,6 +3,9 @@ import sys
 
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings, StorageContext
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.embeddings.nomic import NomicEmbedding
+from llama_index.embeddings.ollama import OllamaEmbedding
+
 from llama_index.llms.ollama import Ollama
 
 # Chroma db vectore store imports
@@ -13,8 +16,17 @@ from llama_index.vector_stores.chroma import ChromaVectorStore
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
 
-# bge-base embedding model
-Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-base-en-v1.5")
+#Using embedding model hosted by Ollama
+Settings.embed_model = OllamaEmbedding(
+    model_name="nomic-embed-text",
+    base_url="http://localhost:11434",
+    ollama_additional_kwargs={"mirostat": 0},
+)
+
+# using embedding model from hugging face
+#Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-base-en-v1.5")
+#Settings.embed_model = NomicEmbedding(model_name="nomic-embed-text")
+
 
 #Create chroma db client
 setts = chromadb.config.Settings(is_persistent=False)
