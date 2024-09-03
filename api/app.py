@@ -3,7 +3,12 @@ from fastapi import FastAPI
 from datetime import datetime
 from dotenv import load_dotenv
 import os
+from query import *
+from pydantic import BaseModel
 
+class Query(BaseModel):
+    query: str
+    description: str | None = None
 
 load_dotenv()
 TEMP_FOLDER = os.getenv('TEMP_FOLDER', './_temp')
@@ -27,5 +32,6 @@ def route_embed():
     return {"message": "Embedded successfully"}
 
 @app.post('/query')
-def route_query():
-    return {"message": "Query successful"}
+def route_query(query: Query):
+    response = prompt(query.query)
+    return response

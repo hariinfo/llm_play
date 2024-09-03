@@ -13,3 +13,4 @@ PyYAML
 chromadb
 torch==2.3.1
 python-dotenv
+pydantic
