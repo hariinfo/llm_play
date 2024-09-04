@@ -15,7 +15,7 @@ Content-Type: pdf
 POST http://localhost:8000/query
 Content-Type: application/json
 
-{"query": "Give me total Total Medicaid Enrollees in kansas in the year 2024"}
+{"query": "Give me total Total Medicaid Enrollees in minnesota in the year 2024"}
 
 ### -------------------------------------------------------------------------
 POST http://localhost:8000/query_ollama
