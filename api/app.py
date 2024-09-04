@@ -35,3 +35,8 @@ def route_embed():
 def route_query(query: Query):
     response = prompt(query.query)
     return response
+
+@app.post('/query_ollama')
+def route_query(query: Query):
+    response = prompt_ollama(query.query)
+    return response

@@ -15,4 +15,10 @@ Content-Type: pdf
 POST http://localhost:8000/query
 Content-Type: application/json
 
-{"query": "give me chat that was nice"}
+{"query": "Give me total Total Medicaid Enrollees in kansas in the year 2024"}
+
+### -------------------------------------------------------------------------
+POST http://localhost:8000/query_ollama
+Content-Type: application/json
+
+{"query": "Give me total Total Medicaid Enrollees in kansas in the year 2024"}

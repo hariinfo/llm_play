@@ -29,7 +29,21 @@ Settings.embed_model = get_embed_model()
 storage_context = get_vector_storage()
 
 #load private data from a directory
-documents = SimpleDirectoryReader("data").load_data()
+#documents = SimpleDirectoryReader(input_dir=os.getenv("INPUT_DATA_DIR")).load_data()
+reader = SimpleDirectoryReader(
+    input_dir=os.getenv("INPUT_DATA_DIR"),
+    recursive=True,
+)
+
+documents = []
+for docs in reader.iter_data():
+    for doc in docs:
+        # do something with the doc
+        logging.info("reading docs....")
+        doc.text = doc.text.upper()
+        documents.append(doc)
+
+print(len(documents))
 
 # Ollama to run local LLM models
 Settings.llm = Ollama(model=os.getenv("LLM_MODEL"), request_timeout=360.0)
@@ -40,7 +54,7 @@ private_data_index = VectorStoreIndex(documents, storage_context=storage_context
 
 
 query_engine = private_data_index.as_query_engine()
-response = query_engine.query("give me hello world python code")
+response = query_engine.query("Total Medicaid Enrollees in the year 2020")
 print(response)
 
 
